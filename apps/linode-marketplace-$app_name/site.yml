@@ -1,6 +1,6 @@
 # linode ansible playbook
 
-- name: $app_name deploy
+- name: app_name deploy
   hosts: localhost
   connection: local
   gather_facts: true
