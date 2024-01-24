@@ -29,7 +29,6 @@ Once you have gitgen.py variable updated, you are ready to run! Here is how you 
 
 ```
 Usage: python3 pythongitgen.py <new_app_name>
+Example: python3 pythongitgen.py wordpress
 ```
-```
-python3 pythongitgen.py wordpress
-```
+
