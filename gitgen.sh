@@ -12,14 +12,14 @@ if [ -z "$1" ]; then
 fi
 
 # Variables
-repo_directory="path/to/marketplace-apps"
-new_app_name="$1"
-new_branch="${new_app_name}-$(generate_uuid4)"
-gen_repo="https://github.com/hmorris3293/marketplace-gen-template.git"
-gen_dir="/tmp/marketplace-gen-template"
+repo_directory=path/to/marketplace-apps
+new_app_name=$1
+new_branch=${new_app_name}-$(generate_uuid4)
+gen_repo=https://github.com/hmorris3293/marketplace-gen-template.git
+gen_dir=/tmp/marketplace-gen-template
 
 # Change directory to the repository
-cd "$repo_directory" || exit
+cd $repo_directory
 
 # Checkout the develop branch
 git checkout develop
@@ -31,7 +31,7 @@ git fetch upstream
 git merge upstream/develop
 
 # Create a new branch
-git checkout -b "$new_branch"
+git checkout -b $new_branch
 
 echo "Successfully checked out branch: $new_branch"
 
