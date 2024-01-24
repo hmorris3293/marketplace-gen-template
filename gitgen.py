@@ -4,6 +4,23 @@ import subprocess
 import sys
 import uuid
 
+# Function to check if directory exists
+def directory_exists(directory):
+    return os.path.exists(directory)
+
+# Check if the app name argument is provided
+if len(sys.argv) != 2:
+    print("Usage: {} <new_app_name>".format(sys.argv[0]))
+    sys.exit(1)
+
+new_app_name = sys.argv[1]
+app_directory = os.path.join(os.path.expanduser("~/Projects/marketplace-apps/apps"), f'linode-marketplace-{new_app_name}')
+
+# Check if the app directory already exists
+if directory_exists(app_directory):
+    print(f"Error: The directory {app_directory} already exists. App creation aborted.")
+    sys.exit(1)
+
 # Function to remove a directory if it exists
 def remove_directory(directory):
     if os.path.exists(directory):
