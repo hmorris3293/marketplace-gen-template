@@ -10,5 +10,5 @@
     - group_vars/linode/vars
   roles:
     - common
-    - $app_name
+    - app_name
     - post
