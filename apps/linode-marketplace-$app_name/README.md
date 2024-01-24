@@ -1,4 +1,4 @@
-# Linode $app_name Deployment One-Click APP
+# Linode app_name Deployment One-Click APP
 
 Capture your thoughts and securely access them from any device with a highly customizable note-taking software.
 
@@ -8,7 +8,7 @@ Capture your thoughts and securely access them from any device with a highly cus
 | :---      | :----     | :---          |
 | Docker    | 20.10    | Container Management tool |
 | Docker-Compose  | 1.29   | Container Management tool |
-| $app_name | Latest | Open source multimedia note-taking app |
+| app_name | Latest | Open source multimedia note-taking app |
 | postgres:13 | 13 | Free and open-source relational database management system |
 
 **Supported Distributions:**
