@@ -15,6 +15,7 @@ fi
 repo_directory="path/to/marketplace-apps"
 app_name="$1"
 new_branch="${app_name}-$(generate_uuid4)"
+gen_repo="https://github.com/hmorris3293/marketplace-gen-template.git"
 
 # Change directory to the repository
 cd "$repo_directory" || exit
@@ -32,6 +33,14 @@ git merge upstream/develop
 git checkout -b "$new_branch"
 
 echo "Successfully checked out branch: $new_branch"
+
+# Pull down template in tmp
+git -C /tmp clone $gen_repo
+
+# CD into template repo
+cd /tmp/marketplace-gen-template
+
+
 
 
 
