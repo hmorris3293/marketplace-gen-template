@@ -1,4 +1,4 @@
-# $app_name
+# app_name
 - name: setting up environment 
   hosts: localhost
   connection: local
