@@ -72,15 +72,64 @@ subprocess.run(["git", "-C", "/tmp", "clone", gen_repo])
 # Find and replace all occurrences of 'app_name' with the new app name
 replace_text(gen_dir, 'app_name', new_app_name)
 
-# Replace directory names
-os.rename(os.path.join(gen_dir, 'apps', 'linode-marketplace-app_name'),
-          os.path.join(gen_dir, 'apps', 'linode-marketplace-{}'.format(new_app_name)))
-os.rename(os.path.join(gen_dir, 'deployment_scripts', 'linode-marketplace-app_name'),
-          os.path.join(gen_dir, 'deployment_scripts', 'linode-marketplace-{}'.format(new_app_name)))
+# Find and replace in files
+for root, dirs, files in os.walk(gen_dir):
+    if '.git' in dirs:
+        dirs.remove('.git')  # Exclude the .git directory from further processing
+    for file in files:
+        file_path = os.path.join(root, file)
+        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+            content = f.read()
+        content = content.replace('app_name', new_app_name)
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
 
-# Copy all things over to new branch
-shutil.copytree(os.path.join(gen_dir, 'apps'), os.path.join(repo_directory, 'apps', 'linode-marketplace-{}'.format(new_app_name)))
-shutil.copytree(os.path.join(gen_dir, 'deployment_scripts'), os.path.join(repo_directory, 'deployment_scripts', 'linode-marketplace-{}'.format(new_app_name)))
+# Replace in directory names
+for root, dirs, files in os.walk(gen_dir):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        new_dir_path = dir_path.replace('app_name', new_app_name)
+        os.rename(dir_path, new_dir_path)
+
+# Copy directories to the new branch
+apps_dest_path = os.path.join(repo_directory, 'apps', f'linode-marketplace-{new_app_name}')
+deployment_scripts_dest_path = os.path.join(repo_directory, 'deployment_scripts', f'linode-marketplace-{new_app_name}')
+
+shutil.copytree(os.path.join(gen_dir, 'apps', f'linode-marketplace-{new_app_name}'), apps_dest_path)
+shutil.copytree(os.path.join(gen_dir, 'deployment_scripts', f'linode-marketplace-{new_app_name}'), deployment_scripts_dest_path)
+
+# Update roles directory
+roles_dest_path = os.path.join(repo_directory, 'apps', f'linode-marketplace-{new_app_name}', 'roles')
+for root, dirs, files in os.walk(roles_dest_path):
+    for file in files:
+        file_path = os.path.join(root, file)
+        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+            content = f.read()
+
+        # Replace 'app_name' with the new app name
+        content = content.replace('app_name', new_app_name)
+
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+    # Rename the 'app_name' directory to the new app name
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        new_dir_path = os.path.join(root, dir_name.replace('app_name', new_app_name))
+        os.rename(dir_path, new_dir_path)
+
+print("Updated 'app_name' in role files and directory names.")
+
+# Update deployment script files if they exist
+deploy_script_path = os.path.join(repo_directory, 'deployment_scripts', f'linode-marketplace-{new_app_name}', 'app_name-deploy.sh')
+new_deploy_script_path = os.path.join(repo_directory, 'deployment_scripts', f'linode-marketplace-{new_app_name}', f'{new_app_name}-deploy.sh')
+
+if os.path.exists(deploy_script_path):
+    # Use shutil.move to rename the file
+    shutil.move(deploy_script_path, new_deploy_script_path)
+    print(f"Updated deployment script: {new_deploy_script_path}")
+else:
+    print(f"Warning: Deployment script file not found at {deploy_script_path}. Make sure it exists.")
 
 # Verify
 app_directory = os.path.join(repo_directory, 'apps', 'linode-marketplace-{}'.format(new_app_name))
