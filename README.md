@@ -3,7 +3,6 @@ This repo will accelerate the creation of new apps in the Akamai Connected Cloud
 
 https://github.com/akamai-compute-marketplace/marketplace-apps 
 
-
 # How to Use Marketplace-gen-template
 This script will require you to pull down the gitgen.py onto your local machine. To run this script, you will need to have python3 installed along with having your own fork of Akamai Marketplace repository already setup on your machine with proper remote upstream configured.
 
@@ -30,5 +29,12 @@ Once you have gitgen.py variable updated, you are ready to run! Here is how you 
 ```
 Usage: python3 pythongitgen.py <new_app_name>
 Example: python3 pythongitgen.py wordpress
+```
+
+Caveats: If an app already exists in the Akamai Marketplace repository, the script will not run and will output the following:
+
+```
+python3 pythongitgen.py docker
+Error: The directory ~/Projects/marketplace-apps/apps/linode-marketplace-docker already exists. App creation aborted.
 ```
 
