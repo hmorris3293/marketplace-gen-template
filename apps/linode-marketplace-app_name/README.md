@@ -6,14 +6,12 @@ Capture your thoughts and securely access them from any device with a highly cus
 
 | Software  | Version   | Description   |
 | :---      | :----     | :---          |
-| Docker    | 20.10    | Container Management tool |
-| Docker-Compose  | 1.29   | Container Management tool |
 | app_name | Latest | Describe what app_name is |
-| postgres:13 | 13 | Free and open-source relational database management system |
+
 
 **Supported Distributions:**
 
-- Ubuntu 22.04 LTS
+- Ubuntu 24.04 LTS
 
 ## Linode Helpers Included
 
@@ -26,7 +24,7 @@ Capture your thoughts and securely access them from any device with a highly cus
 
 ## Use our API
 
-Customers can choose to the deploy the app_name app through the Linode Marketplace or directly using API. Before using the commands below, you will need to create an [API token](https://www.linode.com/docs/products/tools/linode-api/get-started/#create-an-api-token) or configure [linode-cli](https://www.linode.com/products/cli/) on an environment.
+Customers can choose to the deploy the app_name through the Linode Marketplace or directly using API. Before using the commands below, you will need to create an [API token](https://www.linode.com/docs/products/tools/linode-api/get-started/#create-an-api-token) or configure [linode-cli](https://www.linode.com/products/cli/) on an environment.
 
 Make sure that the following values are updated at the top of the code block before running the commands:
 - TOKEN
