@@ -24,7 +24,7 @@
 # sets customer supplied ssh pubkey to limited user
 - name: set ssh pubkey
   import_role:
-      name: sshkey
+    name: sshkey
 
 # disable root login w/wo pubkey
 - name: secure ssh
